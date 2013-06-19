@@ -49,6 +49,18 @@ module H3m
       end
     end
 
+    def name
+      record.map_name
+    end
+
+    def description
+      record.map_desc
+    end
+
+    def has_subterranean?
+      record.map_has_subterranean != 0
+    end
+
     def record
       @record ||= H3m::Record.read(file)
     end
