@@ -3,7 +3,7 @@ require "spec_helper"
 describe H3m::Map do
 
   before :all do
-    @files  = Dir.glob("spec/resources/*.h3m")
+    @files  = Dir.glob("spec/resources/SoD_*.h3m")
     @params = @files.map do |path|
       filename = File.basename(path, ".h3m")
       version, size = filename.split("_").map(&:to_sym)
@@ -26,6 +26,21 @@ describe H3m::Map do
       map = H3m::Map.new(path)
       map.size.should == params[:size]
     end
+  end
+
+  it "should return correct name and description" do
+    map = H3m::Map.new("spec/resources/test_1.h3m")
+
+    map.name.should == "test map name"
+    map.description.should == "test map desc"
+  end
+
+  it "should correctly determine subterranean presence" do
+    map = H3m::Map.new("spec/resources/test_1.h3m")
+    map.has_subterranean?.should == true
+
+    map = H3m::Map.new("spec/resources/test_2.h3m")
+    map.has_subterranean?.should == false
   end
 
 end
