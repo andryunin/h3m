@@ -1,10 +1,41 @@
 # H3m
 
-This gem will can extract info about players, teams, map size and version, win conditions of Heroes 3 map.
+Simple parser for Heroes of Might and Magic III map format. Currently can extract info about map name, description, difficulty, size, subterranean presence and minimal required game version (to be continued, see TODO).
 
 ## Usage
 
-TODO: Write usage instructions here
+Usage example:
+
+    >> require "h3m"
+    >> m = H3m::Map.new("path/to/map/file.h3m")
+
+    >> m.name
+    => "Map name"
+
+    >> m.description
+    => "Map description"
+    
+    >> # Version can be :SoD, :AB or :RoE
+    >> m.version
+    => :SoD
+
+    >> # Size can be :S, :M, :L and :XL
+    >> m.size
+    => :M
+
+    >> m.has_subterranean?
+    => false
+
+    >> # Difficulty can be :easy, :normal, :hard, :expert and :impossible
+    >> m.difficulty
+    => :normal
+
+
+## TODO
+
+1. players and alliances
+2. victory and lose conditions
+3. minimap image generation
 
 ## License
 
