@@ -4,7 +4,7 @@ module H3m
 
   class Record < BinData::Record
     endian :little
-    
+
     uint32 :heroes_version
     uint8  :map_has_hero
     uint32 :map_size
@@ -15,6 +15,8 @@ module H3m
 
     uint32 :map_desc_size
     string :map_desc, read_length: :map_desc_size
+
+    uint8  :map_difficulty
   end
 
 end

@@ -57,6 +57,16 @@ module H3m
       record.map_desc
     end
 
+    def difficulty
+      @difficulty ||= case record.map_difficulty
+        when 0 then :easy
+        when 1 then :normal
+        when 2 then :hard
+        when 3 then :expert
+        when 4 then :impossible
+      end
+    end
+
     def has_subterranean?
       record.map_has_subterranean != 0
     end

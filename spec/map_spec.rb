@@ -43,4 +43,12 @@ describe H3m::Map do
     map.has_subterranean?.should == false
   end
 
+  it "should correctly determine map difficulty" do
+    map = H3m::Map.new("spec/resources/test_1.h3m")
+    map.difficulty.should == :normal
+
+    map = H3m::Map.new("spec/resources/test_2.h3m")
+    map.difficulty.should == :impossible
+  end
+
 end
