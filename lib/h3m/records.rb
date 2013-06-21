@@ -2,7 +2,7 @@ require 'bindata'
 
 module H3m
 
-  class Record < BinData::Record
+  class MapRecord < BinData::Record
     endian :little
 
     uint32 :heroes_version
