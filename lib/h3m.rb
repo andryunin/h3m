@@ -64,6 +64,8 @@ module H3m
         when 2 then :hard
         when 3 then :expert
         when 4 then :impossible
+        else
+          raise MapError, "unknown map difficulty"
       end
     end
 
