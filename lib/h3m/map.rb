@@ -22,6 +22,18 @@ module H3m
       @file ||= Zlib::GzipReader.new(@gzip_file)
     end
 
+    def record
+      @record ||= H3m::MapRecord.read(file)
+    end
+
+    def name
+      record.map_name
+    end
+
+    def description
+      record.map_desc
+    end
+
     # Get extension 
     # @return [Symbol] :SoD, :AB or :RoE
     def version
@@ -45,14 +57,6 @@ module H3m
       end
     end
 
-    def name
-      record.map_name
-    end
-
-    def description
-      record.map_desc
-    end
-
     def difficulty
       @difficulty ||= case record.map_difficulty
         when 0 then :easy
@@ -67,10 +71,6 @@ module H3m
 
     def has_subterranean?
       record.map_has_subterranean != 0
-    end
-
-    def record
-      @record ||= H3m::MapRecord.read(file)
     end
   end
 
