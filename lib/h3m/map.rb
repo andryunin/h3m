@@ -13,9 +13,24 @@ module H3m
 
     attr_reader :path
 
-    def initialize(path)
-      @path = path
-      @gzip_file = File.new(path)
+    def initialize(file, unzipped=false)
+      if file.respond_to? :read
+        # Consider file argument is IO-like object
+        @path = file.path if file.respond_to? :path
+        if unzipped
+          @file = file
+        else
+          @gzip_file = file
+        end
+      else
+        # Consider file argument is a file path
+        @path = file
+        if unzipped
+          @file = File.new(path)
+        else
+          @gzip_file = File.new(path)
+        end
+      end
     end
 
     def file
@@ -70,6 +85,9 @@ module H3m
     end
 
     def has_subterranean?
+      unless [0, 1].include? record.map_has_subterranean
+        raise MapError, "unknown value for subterranean presence flag"
+      end
       record.map_has_subterranean != 0
     end
   end
