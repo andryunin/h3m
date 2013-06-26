@@ -90,6 +90,12 @@ module H3m
       end
       record.map_has_subterranean != 0
     end
+
+    def players
+      @players ||= record.players.each_with_index.map do |rec, i|
+        Player.new(rec, i)
+      end
+    end
   end
 
 end
