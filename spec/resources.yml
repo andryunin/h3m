@@ -1,0 +1,44 @@
+- file:        "specmap_0.h3m"
+  name:        "specmap #0"
+  description: "specmap #0 description"
+
+  difficulty:  impossible
+  version:     SoD
+  size:        S
+  max_level:   10
+
+  has_subterranean: true
+
+  players:
+    - present:            true
+      human:              true
+      computer:           true
+      computer_behaviour: random
+    - present:  true
+    - present:  false
+    - present:  false
+    - present:  false
+    - present:  false
+    - present:  true
+    - present:  true
+
+- file:        "specmap_1.h3m"
+  name:        "specmap #1"
+  description: "specmap #1 description"
+
+  difficulty:  normal
+  version:     RoE
+  size:        XL
+  max_level:   -1
+
+  has_subterranean: false
+
+  players:
+    - present:  true
+    - present:  true
+    - present:  false
+    - present:  false
+    - present:  false
+    - present:  false
+    - present:  false
+    - present:  false
