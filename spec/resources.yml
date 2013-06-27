@@ -14,13 +14,26 @@
       human:              true
       computer:           true
       computer_behaviour: random
+      has_town_on_start:  true
     - present:  true
+      human:              false
+      computer:           true
+      computer_behaviour: random
+      has_town_on_start:  true
     - present:  false
     - present:  false
     - present:  false
     - present:  false
     - present:  true
+      human:              false
+      computer:           true
+      computer_behaviour: warrior
+      has_town_on_start:  true
     - present:  true
+      human:              false
+      computer:           true
+      computer_behaviour: explorer
+      has_town_on_start:  true
 
 - file:        "specmap_1.h3m"
   name:        "specmap #1"
@@ -35,7 +48,15 @@
 
   players:
     - present:  true
+      human:              true
+      computer:           true
+      computer_behaviour: random
+      has_town_on_start:  false
     - present:  true
+      human:              false
+      computer:           true
+      computer_behaviour: random
+      has_town_on_start:  false
     - present:  false
     - present:  false
     - present:  false
