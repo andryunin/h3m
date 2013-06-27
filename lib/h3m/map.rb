@@ -57,7 +57,7 @@ module H3m
         when 0x15 then :AB
         when 0x1C then :SoD
         else
-          raise MapError, "unknown map version"
+          raise MapError.new("unknown map version")
       end
     end
 
@@ -68,7 +68,7 @@ module H3m
         when 108 then :L
         when 144 then :XL
         else
-          raise MapError, "unknown map size"
+          raise MapError.new("unknown map size")
       end
     end
 
@@ -80,13 +80,14 @@ module H3m
         when 3 then :expert
         when 4 then :impossible
         else
-          raise MapError, "unknown map difficulty"
+          raise MapError.new("unknown map difficulty %x" % record.map_difficulty)
       end
     end
 
     def has_subterranean?
       unless [0, 1].include? record.map_has_subterranean
-        raise MapError, "unknown value for subterranean presence flag"
+        raise MapError.new("unknown value %x for subterranean presence flag" %
+                           record.map_has_subterranean)
       end
       record.map_has_subterranean != 0
     end

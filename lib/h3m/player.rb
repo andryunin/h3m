@@ -22,16 +22,19 @@ module H3m
 
     def human?
       unless [0, 1].include? record.can_be_human
-        raise PlayerError, "unknown value for human availability flag"
+        raise PlayerError.new("unknown value %X for human availability flag" %
+                              record.can_be_human)
       end
-      record.can_be_human.nonzero != 0
+      record.can_be_human != 0
     end
 
     def computer?
       unless [0, 1].include? record.can_be_computer
-        raise PlayerError, "unknown value for computer availability flag"
+        raise PlayerError.new("unknown value %X for computer availability flag" %
+                              record.can_be_computer)
+
       end
-      record.can_be_computer.nonzero != 0
+      record.can_be_computer != 0
     end
 
     def present?
@@ -49,7 +52,8 @@ module H3m
         when 2 then :builder
         when 3 then :explorer
         else
-          raise PlayerException, "unknown computer behaviour"
+          raise PlayerException.new("unknown computer behaviour %X" %
+                                    record.computer_behaviour)
       end
     end
 
