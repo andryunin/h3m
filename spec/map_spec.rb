@@ -49,10 +49,10 @@ describe H3m::Map do
       map.description.should == file[:params]["description"]
     end
 
-    map = H3m::Map.new(@badfile, true)
-
-    map.name.should == ""
-    map.description.should == ""
+    expect {
+      map = H3m::Map.new(@badfile, true)
+      map.name
+    }.to raise_error(H3m::MapError)
   end
 
   it "should correctly determine subterranean presence" do
