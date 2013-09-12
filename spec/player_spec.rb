@@ -13,6 +13,7 @@ describe H3m::Player do
 
       before :all do
         @map = H3m::Map.new(file[:path])
+        @players = @map.players
         @present_players  = @map.players.select {|p| p.present? }
         @computer_players = @map.players.select {|p| p.computer? }
       end
@@ -24,15 +25,17 @@ describe H3m::Player do
       end
 
       it "should determine player availability to human and computer" do
-        @present_players.each_with_index do |p, i|
-          p.human?.should == file[:params]["players"][i]["human"]
-          p.computer?.should == file[:params]["players"][i]["human"]
+        @players.each_with_index do |p, i|
+          p.human?.should    == (file[:params]["players"][i]["human"] || false)
+          p.computer?.should == (file[:params]["players"][i]["computer"] || false)
         end
       end
       
       it "should determine computer behaviour" do
-        @computer_players.each_with_index do |p, i|
-          p.computer_behaviour.should == file[:params]["players"][i]["computer_behaviour"]
+        @players.each_with_index do |p, i|
+          if file[:params]["players"][i]["computer_behaviour"]
+            p.computer_behaviour.should == file[:params]["players"][i]["computer_behaviour"].to_sym
+          end
         end
       end
       
