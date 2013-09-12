@@ -38,12 +38,6 @@ describe H3m::Player do
           end
         end
       end
-      
-      it "should determine has player town on start or not" do
-        @present_players.each_with_index do |p, i|
-          p.has_town_on_start?.should == file[:params]["players"][i]["has_town_on_start"]
-        end
-      end
 
     end
   end

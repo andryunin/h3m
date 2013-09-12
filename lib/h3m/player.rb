@@ -56,10 +56,6 @@ module H3m
                                     record.computer_behaviour)
       end
     end
-
-    def has_town_on_start?
-      record.has_town_on_start != '0'
-    end
   end
 
 end
