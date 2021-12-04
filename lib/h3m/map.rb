@@ -38,7 +38,7 @@ module H3m
     end
 
     def record
-      @record ||= H3m::MapRecord.read(file)
+      @record ||= H3m::Records::MapRecord.read(file)
     rescue IOError => e
       raise H3m::MapError.new("IOError: #{e}")
     rescue RangeError => e

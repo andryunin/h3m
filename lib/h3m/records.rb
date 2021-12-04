@@ -1,7 +1,6 @@
 require 'bindata'
 
-module H3m
-
+module H3m::Records
   class HeroRecord < BinData::Record
     endian :little
 
