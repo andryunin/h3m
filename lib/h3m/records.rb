@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'bindata'
+require "bindata"
 
 module H3m::Records
   class HeroRecord < BinData::Record
@@ -70,5 +70,4 @@ module H3m::Records
 
     array  :players, type: :player_record, initial_length: 8
   end
-
 end

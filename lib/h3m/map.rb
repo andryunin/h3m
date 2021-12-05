@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 module H3m
-
   class MapError < StandardError
   end
-  
+
   class Map
     # Map representation
     #
@@ -15,7 +14,7 @@ module H3m
 
     attr_reader :path
 
-    def initialize(file, unzipped=false)
+    def initialize(file, unzipped = false)
       if file.respond_to? :read
         # Consider file argument is IO-like object
         @path = file.path if file.respond_to? :path
@@ -42,9 +41,9 @@ module H3m
     def record
       @record ||= H3m::Records::MapRecord.read(file)
     rescue IOError => e
-      raise H3m::MapError.new("IOError: #{e}")
+      raise H3m::MapError, "IOError: #{e}"
     rescue RangeError => e
-      raise H3m::MapError.new("RangeError: #{e}")
+      raise H3m::MapError, "RangeError: #{e}"
     end
 
     def name
@@ -55,45 +54,45 @@ module H3m
       record.map_desc
     end
 
-    # Get extension 
+    # Get extension
     # @return [Symbol] :SoD, :AB or :RoE
     def version
       @version ||= case record.heroes_version
-        when 0x0E then :RoE
-        when 0x15 then :AB
-        when 0x1C then :SoD
-        else
-          raise MapError.new("unknown map version")
-      end
+                   when 0x0E then :RoE
+                   when 0x15 then :AB
+                   when 0x1C then :SoD
+                   else
+                     raise MapError, "unknown map version"
+                   end
     end
 
     def size
       @size ||= case record.map_size
-        when 36  then :S
-        when 72  then :M
-        when 108 then :L
-        when 144 then :XL
-        else
-          raise MapError.new("unknown map size")
-      end
+                when 36  then :S
+                when 72  then :M
+                when 108 then :L
+                when 144 then :XL
+                else
+                  raise MapError, "unknown map size"
+                end
     end
 
     def difficulty
       @difficulty ||= case record.map_difficulty
-        when 0 then :easy
-        when 1 then :normal
-        when 2 then :hard
-        when 3 then :expert
-        when 4 then :impossible
-        else
-          raise MapError.new("unknown map difficulty %x" % record.map_difficulty)
-      end
+                      when 0 then :easy
+                      when 1 then :normal
+                      when 2 then :hard
+                      when 3 then :expert
+                      when 4 then :impossible
+                      else
+                        raise MapError, "unknown map difficulty %x" % record.map_difficulty
+                      end
     end
 
     def has_subterranean?
       unless [0, 1].include? record.map_has_subterranean
-        raise MapError.new("unknown value %x for subterranean presence flag" %
-                           record.map_has_subterranean)
+        raise MapError, "unknown value %x for subterranean presence flag" %
+                        record.map_has_subterranean
       end
       record.map_has_subterranean != 0
     end
@@ -104,5 +103,4 @@ module H3m
       end
     end
   end
-
 end
