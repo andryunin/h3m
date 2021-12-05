@@ -13,7 +13,7 @@ RSpec.describe H3m::Player do
         @map = H3m::Map.new(file[:path])
         @players = @map.players
         @present_players = @map.players.select { |p| p.present? }
-        @computer_players = @map.players.select { |p| p.computer? }
+        @computer_players = @map.players.select { |p| p.can_be_ai? }
       end
 
       it "should determine player presence" do
@@ -24,8 +24,13 @@ RSpec.describe H3m::Player do
 
       it "should determine player availability to human and computer" do
         @players.each_with_index do |p, i|
-          expect(p.human?).to eq(file[:params]["players"][i]["human"] || false)
-          expect(p.computer?).to eq(file[:params]["players"][i]["computer"] || false)
+          expect(p.can_be_human?).to eq(
+            file[:params]["players"][i]["human"] || false
+          )
+
+          expect(p.can_be_computer?).to eq(
+            file[:params]["players"][i]["computer"] || false
+          )
         end
       end
 
@@ -34,7 +39,7 @@ RSpec.describe H3m::Player do
           next unless file[:params]["players"][i]["computer_behaviour"]
 
           expect(p.computer_behaviour).to eq(
-            file[:params]["players"][i]["computer_behaviour"].to_sym
+            file[:params]["players"][i]["ai_behaviour"].to_sym
           )
         end
       end

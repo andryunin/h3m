@@ -10,30 +10,30 @@
   has_subterranean_level: true
 
   players:
-    - present:            true
-      human:              true
-      computer:           true
-      computer_behaviour: random
-      has_town_on_start:  true
-    - present:  true
-      human:              false
-      computer:           true
-      computer_behaviour: random
-      has_town_on_start:  true
+    - present:           true
+      can_be_human:      true
+      can_be_ai:         true
+      ai_behaviour:      random
+      has_town_on_start: true
+    - present:           true
+      can_be_human:      false
+      can_be_ai:         true
+      ai_behaviour:      random
+      has_town_on_start: true
     - present:  false
     - present:  false
     - present:  false
     - present:  false
     - present:  true
-      human:              false
-      computer:           true
-      computer_behaviour: warrior
-      has_town_on_start:  true
-    - present:  true
-      human:              false
-      computer:           true
-      computer_behaviour: explorer
-      has_town_on_start:  true
+      can_be_human:      false
+      can_be_ai:         true
+      ai_behaviour:      warrior
+      has_town_on_start: true
+    - present:           true
+      can_be_human:      false
+      can_be_ai:         true
+      ai_behaviour:      explorer
+      has_town_on_start: true
 
 - file:         "specmap_1.h3m"
   name:         "specmap #1"
@@ -47,16 +47,16 @@
   has_subterranean_level: false
 
   players:
-    - present:  true
-      human:              true
-      computer:           true
-      computer_behaviour: random
-      has_town_on_start:  false
-    - present:  true
-      human:              false
-      computer:           true
-      computer_behaviour: random
-      has_town_on_start:  false
+    - present:           true
+      can_be_human:      true
+      can_be_ai:         true
+      ai_behaviour:      random
+      has_town_on_start: false
+    - present:           true
+      can_be_human:      false
+      can_be_ai:         true
+      ai_behaviour:      random
+      has_town_on_start: false
     - present:  false
     - present:  false
     - present:  false

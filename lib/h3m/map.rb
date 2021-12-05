@@ -35,7 +35,15 @@ module H3m
     end
 
     def file
-      @file ||= Zlib::GzipReader.new(@gzip_file)
+      # GzipReader does no support #seek method, so we have to read and unzip
+      # whole file
+
+      unless @file
+        blob = Zlib::GzipReader.new(@gzip_file).read
+        @file = StringIO.new(blob).binmode
+      end
+
+      @file
     end
 
     def record

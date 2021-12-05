@@ -15,31 +15,43 @@ module H3m::Records
     endian :little
 
     uint8 :can_be_human
-    uint8 :can_be_computer
-    uint8 :computer_behaviour
+    uint8 :can_be_ai
+    uint8 :ai_behaviour
 
-    uint8  :can_have_town_types_set
-    uint16 :can_have_town_types
-    uint8  :has_random_town
-    uint8  :has_main_town
+    skip length: 1, onlyif: -> { %w[SoD WoG].include?(game_version) }
 
-    uint8  :main_town_has_hero, onlyif: :has_main_town?
-    uint8  :main_town_type,     onlyif: :has_main_town?
-    uint8  :main_town_coord_x,  onlyif: :has_main_town?
-    uint8  :main_town_coord_y,  onlyif: :has_main_town?
-    uint8  :main_town_coord_z,  onlyif: :has_main_town?
+    # RoE has no Conflux
+    uint8  :allowed_factions_roe, onlyif: -> { game_version == "RoE" }
+    uint16 :allowed_factions_post_roe, onlyif: -> { game_version != "RoE" }
 
-    uint8  :has_random_hero
+    def allowed_factions
+      if game_version == "RoE"
+        allowed_factions_roe
+      else
+        allowed_factions_post_roe
+      end
+    end
 
-    uint8  :first_hero_type
-    uint8  :first_hero_face
-    uint32 :first_hero_name_size
-    string :first_hero_name, read_length: :first_hero_name_size
+    # uint8 :is_faction_random
+    # uint8 :has_main_town
 
-    uint8  :unknown_offset, onlyif: :has_heroes?
-    uint32 :heroes_count,   onlyif: :has_heroes?
+    # uint8  :main_town_has_hero, onlyif: :has_main_town?
+    # uint8  :main_town_type,     onlyif: :has_main_town?
+    # uint8  :main_town_coord_x,  onlyif: :has_main_town?
+    # uint8  :main_town_coord_y,  onlyif: :has_main_town?
+    # uint8  :main_town_coord_z,  onlyif: :has_main_town?
 
-    array  :heroes, type: :hero_record, initial_length: :heroes_count
+    # uint8  :has_random_hero
+
+    # uint8  :first_hero_type
+    # uint8  :first_hero_face
+    # uint32 :first_hero_name_size
+    # string :first_hero_name, read_length: :first_hero_name_size
+
+    # uint8  :unknown_offset, onlyif: :has_heroes?
+    # uint32 :heroes_count,   onlyif: :has_heroes?
+
+    # array  :heroes, type: :hero_record, initial_length: :heroes_count
 
     def has_main_town?
       has_main_town.nonzero?
@@ -70,7 +82,7 @@ module H3m::Records
     # no max_level in RoE maps
     uint8  :max_level, onlyif: -> { game_version != "RoE" }
 
-    # array  :players, type: :player_record, initial_length: 8
+    array  :players, type: :player_record, initial_length: 8
 
     def game_version
       game_version_from_code(game_version_code)

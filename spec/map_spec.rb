@@ -80,13 +80,13 @@ RSpec.describe H3m::Map do
     end.to raise_error(H3m::FormatError)
   end
 
-  # it "should return 8 player instances" do
-  #   @files.each do |file|
-  #     map = H3m::Map.new(file[:path])
-  #     expect(map.players.size).to eq(8)
-  #     map.players.each do |player|
-  #       expect(player).to be_an_instance_of(H3m::Player)
-  #     end
-  #   end
-  # end
+  it "should return 8 player instances" do
+    @files.each do |file|
+      map = H3m::Map.new(file[:path])
+      expect(map.players.size).to eq(8)
+      map.players.each do |player|
+        expect(player).to be_an_instance_of(H3m::Player)
+      end
+    end
+  end
 end
