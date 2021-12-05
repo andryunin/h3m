@@ -1,18 +1,15 @@
-*.gem
-*.rbc
-.bundle
-.config
-.yardoc
-Gemfile.lock
-InstalledFiles
-_yardoc
-coverage
-doc/
-lib/bundler/man
-pkg
-rdoc
-spec/reports
-test/tmp
-test/version_tmp
-tmp
-.notes
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# rspec failure tracking
+.rspec_status
+
+# editor configuration
+.vscode
+.idea

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module H3m
 
   class PlayerError < MapError
