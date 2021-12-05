@@ -6,6 +6,7 @@ require "bindata"
 
 module H3m
   class Error < StandardError; end
+  class FormatError < Error; end
 
   autoload :Map,          "h3m/map.rb"
   autoload :MapError,     "h3m/map.rb"

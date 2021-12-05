@@ -40,10 +40,6 @@ module H3m
 
     def record
       @record ||= H3m::Records::MapRecord.read(file)
-    rescue IOError => e
-      raise H3m::MapError, "IOError: #{e}"
-    rescue RangeError => e
-      raise H3m::MapError, "RangeError: #{e}"
     end
 
     def name
@@ -54,46 +50,39 @@ module H3m
       record.map_desc
     end
 
-    # Get extension
-    # @return [Symbol] :SoD, :AB or :RoE
-    def version
-      @version ||= case record.heroes_version
-                   when 0x0E then :RoE
-                   when 0x15 then :AB
-                   when 0x1C then :SoD
-                   else
-                     raise MapError, "unknown map version"
-                   end
+    def game_version
+      record.game_version.to_sym
     end
 
     def size
-      @size ||= case record.map_size
-                when 36  then :S
-                when 72  then :M
-                when 108 then :L
-                when 144 then :XL
-                else
-                  raise MapError, "unknown map size"
-                end
+      case record.map_size
+      # Original series sizes
+      when 36  then :S
+      when 72  then :M
+      when 108 then :L
+      when 144 then :XL
+      # HotA map sizes
+      when 180 then :H
+      when 216 then :XH
+      when 252 then :G
+      else
+        raise FormatError, "unknown map size value: #{record.map_size}"
+      end
     end
 
     def difficulty
-      @difficulty ||= case record.map_difficulty
-                      when 0 then :easy
-                      when 1 then :normal
-                      when 2 then :hard
-                      when 3 then :expert
-                      when 4 then :impossible
-                      else
-                        raise MapError, "unknown map difficulty %x" % record.map_difficulty
-                      end
+      case record.map_difficulty
+      when 0 then :easy
+      when 1 then :normal
+      when 2 then :hard
+      when 3 then :expert
+      when 4 then :impossible
+      else
+        raise FormatError, "unknown map difficulty: #{record.map_difficulty}"
+      end
     end
 
-    def has_subterranean?
-      unless [0, 1].include? record.map_has_subterranean
-        raise MapError, "unknown value %x for subterranean presence flag" %
-                        record.map_has_subterranean
-      end
+    def subterranean_level?
       record.map_has_subterranean != 0
     end
 

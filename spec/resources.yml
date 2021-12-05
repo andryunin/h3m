@@ -1,13 +1,13 @@
-- file:        "specmap_0.h3m"
-  name:        "specmap #0"
-  description: "specmap #0 description"
+- file:         "specmap_0.h3m"
+  name:         "specmap #0"
+  description:  "specmap #0 description"
 
-  difficulty:  impossible
-  version:     SoD
-  size:        S
-  max_level:   10
+  difficulty:   impossible
+  game_version: SoD
+  size:         S
+  max_level:    10
 
-  has_subterranean: true
+  has_subterranean_level: true
 
   players:
     - present:            true
@@ -35,16 +35,16 @@
       computer_behaviour: explorer
       has_town_on_start:  true
 
-- file:        "specmap_1.h3m"
-  name:        "specmap #1"
-  description: "specmap #1 description"
+- file:         "specmap_1.h3m"
+  name:         "specmap #1"
+  description:  "specmap #1 description"
 
-  difficulty:  normal
-  version:     RoE
-  size:        XL
-  max_level:   -1
+  difficulty:   normal
+  game_version: RoE
+  size:         XL
+  max_level:    -1
 
-  has_subterranean: false
+  has_subterranean_level: false
 
   players:
     - present:  true

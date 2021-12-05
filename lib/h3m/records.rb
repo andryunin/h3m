@@ -53,21 +53,39 @@ module H3m::Records
   class MapRecord < BinData::Record
     endian :little
 
-    uint32 :heroes_version
-    uint8  :map_has_hero
+    uint32 :game_version_code, check_value: -> { game_version_from_code(value) }
+
+    uint8  :map_has_players
     uint32 :map_size
     uint8  :map_has_subterranean
 
-    uint32 :map_name_size
-    string :map_name, read_length: :map_name_size
+    uint32 :map_name_length
+    string :map_name, read_length: :map_name_length
 
-    uint32 :map_desc_size
-    string :map_desc, read_length: :map_desc_size
+    uint32 :map_desc_length
+    string :map_desc, read_length: :map_desc_length
 
     uint8  :map_difficulty
 
-    uint8  :max_level
+    # no max_level in RoE maps
+    uint8  :max_level, onlyif: -> { game_version != "RoE" }
 
     # array  :players, type: :player_record, initial_length: 8
+
+    def game_version
+      game_version_from_code(game_version_code)
+    end
+
+    def game_version_from_code(code)
+      # TODO: add HotA code
+      case code
+      when 0x0E then "RoE"
+      when 0x15 then "AB"
+      when 0x1C then "SoD"
+      when 0x33 then "WoG"
+      else
+        raise H3m::FormatError, "unknown game version code: #{code}"
+      end
+    end
   end
 end
