@@ -6,7 +6,7 @@ module H3m::Records
   class HeroRecord < BinData::Record
     endian :little
 
-    uint8  :type
+    uint8  :hero_type
     uint32 :name_size
     string :name, read_length: :name_size
   end
@@ -68,6 +68,6 @@ module H3m::Records
 
     uint8  :max_level
 
-    array  :players, type: :player_record, initial_length: 8
+    # array  :players, type: :player_record, initial_length: 8
   end
 end

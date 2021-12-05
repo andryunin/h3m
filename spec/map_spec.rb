@@ -1,7 +1,7 @@
 require "spec_helper"
 require "yaml"
 
-describe H3m::Map do
+RSpec.describe H3m::Map do
   before :all do
     @fixtures = YAML.load_file("spec/resources.yml")
     @files = @fixtures.map do |p|
@@ -20,7 +20,7 @@ describe H3m::Map do
   it "should return correct version" do
     @files.each do |file|
       map = H3m::Map.new(file[:path])
-      map.version.should == file[:params]["version"].to_sym
+      expect(map.version).to eq(file[:params]["version"].to_sym)
     end
 
     expect do
@@ -32,7 +32,7 @@ describe H3m::Map do
   it "should return correct size" do
     @files.each do |file|
       map = H3m::Map.new(file[:path])
-      map.size.should == file[:params]["size"].to_sym
+      expect(map.size).to eq(file[:params]["size"].to_sym)
     end
 
     expect do
@@ -44,8 +44,8 @@ describe H3m::Map do
   it "should return correct name and description" do
     @files.each do |file|
       map = H3m::Map.new(file[:path])
-      map.name.should == file[:params]["name"]
-      map.description.should == file[:params]["description"]
+      expect(map.name).to eq(file[:params]["name"])
+      expect(map.description).to eq(file[:params]["description"])
     end
 
     expect do
@@ -57,7 +57,7 @@ describe H3m::Map do
   it "should correctly determine subterranean presence" do
     @files.each do |file|
       map = H3m::Map.new(file[:path])
-      map.has_subterranean?.should == file[:params]["has_subterranean"]
+      expect(map.has_subterranean?).to eq(file[:params]["has_subterranean"])
     end
 
     expect do
@@ -69,7 +69,7 @@ describe H3m::Map do
   it "should correctly determine map difficulty" do
     @files.each do |file|
       map = H3m::Map.new(file[:path])
-      map.difficulty.should == file[:params]["difficulty"].to_sym
+      expect(map.difficulty).to eq(file[:params]["difficulty"].to_sym)
     end
 
     expect do
@@ -81,9 +81,9 @@ describe H3m::Map do
   it "should return 8 player instances" do
     @files.each do |file|
       map = H3m::Map.new(file[:path])
-      map.players.size.should == 8
+      expect(map.players.size).to eq(8)
       map.players.each do |player|
-        player.should be_an_instance_of(H3m::Player)
+        expect(player).to be_an_instance_of(H3m::Player)
       end
     end
   end

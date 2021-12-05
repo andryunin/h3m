@@ -1,7 +1,7 @@
 require "spec_helper"
 require "yaml"
 
-describe H3m::Player do
+RSpec.describe H3m::Player do
   @fixtures = YAML.load_file("spec/resources.yml")
   @files = @fixtures.map do |p|
     { path: "spec/resources/#{p["file"]}", params: p }
@@ -18,22 +18,24 @@ describe H3m::Player do
 
       it "should determine player presence" do
         @players.each_with_index do |p, i|
-          p.present?.should == file[:params]["players"][i]["present"]
+          expect(p.present?).to eq(file[:params]["players"][i]["present"])
         end
       end
 
       it "should determine player availability to human and computer" do
         @players.each_with_index do |p, i|
-          p.human?.should    == (file[:params]["players"][i]["human"] || false)
-          p.computer?.should == (file[:params]["players"][i]["computer"] || false)
+          expect(p.human?).to eq(file[:params]["players"][i]["human"] || false)
+          expect(p.computer?).to eq(file[:params]["players"][i]["computer"] || false)
         end
       end
 
       it "should determine computer behaviour" do
         @players.each_with_index do |p, i|
-          if file[:params]["players"][i]["computer_behaviour"]
-            p.computer_behaviour.should == file[:params]["players"][i]["computer_behaviour"].to_sym
-          end
+          next unless file[:params]["players"][i]["computer_behaviour"]
+
+          expect(p.computer_behaviour).to eq(
+            file[:params]["players"][i]["computer_behaviour"].to_sym
+          )
         end
       end
     end
