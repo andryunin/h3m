@@ -23,16 +23,19 @@ module H3m::Records
     # RoE has no Conflux
     uint8  :allowed_factions_roe, onlyif: -> { game_version == "RoE" }
     uint16 :allowed_factions_post_roe, onlyif: -> { game_version != "RoE" }
+    uint8  :is_random_faction
 
     def allowed_factions
-      if game_version == "RoE"
-        allowed_factions_roe
-      else
-        allowed_factions_post_roe
-      end
+      allowed_factions_mask =
+        if game_version == "RoE"
+          allowed_factions_roe
+        else
+          allowed_factions_post_roe
+        end
+
+      allowed_factions_mask
     end
 
-    # uint8 :is_faction_random
     # uint8 :has_main_town
 
     # uint8  :main_town_has_hero, onlyif: :has_main_town?
@@ -89,6 +92,9 @@ module H3m::Records
     end
 
     def game_version_from_code(code)
+      # Can't use symbols here: bindata considers them to be method names and
+      # tries to call it
+
       # TODO: add HotA code
       case code
       when 0x0E then "RoE"
