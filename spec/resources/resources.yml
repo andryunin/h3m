@@ -1,0 +1,10 @@
+- file:         "specmap-roe.h3m"
+  name:         "specmap roe"
+  description:  "description line 1\ndescription line 2"
+
+  difficulty:   :easy
+  game_version: :RoE
+  size:         :S
+  max_level:    10
+
+  has_subterranean_level: true
