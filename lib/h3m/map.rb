@@ -4,14 +4,13 @@ module H3m
   class MapError < StandardError
   end
 
+  # Map representation
+  #
+  # Example:
+  #   >> map = H3m::Map.new("some-map-file.h3m")
+  #   >> map.version
+  #   => :SoD
   class Map
-    # Map representation
-    #
-    # Example:
-    #   >> map = H3m::Map.new("some-map-file.h3m")
-    #   >> map.version
-    #   => :SoD
-
     attr_reader :path
 
     def initialize(file, unzipped = false)

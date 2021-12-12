@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Maxim Andryunin"]
   spec.email         = ["maxim.andryunin@gmail.com"]
 
-  spec.description   = %q{This gem will can extract info about players, teams, map size and version, win conditions of Heroes 3 map}
-  spec.summary       = %q{Extract some info from Heroes of Might and Magic 3 map (.h3m)}
+  spec.description   = "This gem will can extract info about players, teams, map size and version, win conditions of Heroes 3 map"
+  spec.summary       = "Extract some info from Heroes of Might and Magic 3 map (.h3m)"
   spec.homepage      = "https://github.com/andryunin/h3m"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 3.0.0")

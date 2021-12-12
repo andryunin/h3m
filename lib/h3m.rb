@@ -4,6 +4,7 @@ require_relative "h3m/version"
 require "zlib"
 require "bindata"
 
+# H3m is parser for Heroes of Might and Magic III maps
 module H3m
   class Error < StandardError; end
   class FormatError < Error; end

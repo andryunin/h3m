@@ -4,9 +4,8 @@ module H3m
   class PlayerError < MapError
   end
 
+  # Player representation
   class Player
-    # Player representation
-
     COLORS = %i[red blue tan green orange purple teal pink].freeze
 
     FACTIONS = %i[
