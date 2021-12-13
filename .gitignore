@@ -10,6 +10,7 @@
 # rspec failure tracking
 .rspec_status
 
-# editor configuration
+# editors and notes
 .vscode
 .idea
+.notes
