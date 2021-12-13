@@ -13,4 +13,5 @@ module H3m
   autoload :MapError,     "h3m/map.rb"
   autoload :Player,       "h3m/player.rb"
   autoload :Records,      "h3m/records.rb"
+  autoload :RecordUtil,   "h3m/record_util.rb"
 end
